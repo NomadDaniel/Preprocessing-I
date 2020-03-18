@@ -1,8 +1,4 @@
-// Is this working?
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+// ============ Skip to line 139 for today's code about mixins about variables============
 
 html,
 body,
@@ -85,12 +81,12 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -104,38 +100,215 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+display: block;
 }
 body {
-  line-height: 1;
+line-height: 1;
 }
 ol,
 ul {
-  list-style: none;
+list-style: none;
 }
 blockquote,
 q {
-  quotes: none;
+quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
-  content: none;
+content: "";
+content: none;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+border-collapse: collapse;
+border-spacing: 0;
 }
 
 /* Set every element's box-sizing to border-box */
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-  // background-color: blue;
+// ============Today's code starts here about LESS nesting, variables, and mixins===========
+
+@import url("https://fonts.googleapis.com/css?family=Bellota+Text|Merriweather&display=swap");
+/* Reminder from Brits guided project today...
+LESS - Syntax 
+Compiler - NODE
+Output - CSS
+*/
+
+/* variables */
+@main-color: #008b8b;
+@accent-color: #00ffff;
+@main-font: "Bellota Text", cursive;
+@heading-font: "Merriweather", serif;
+
+/*mixins*/
+.center() {
+display: flex;
+justify-content: center;
 }
+.bordered() {
+border: 2px dotted @accent-color;
+padding: 2%;
+}
+
+html {
+box-sizing: border-box;
+font-size: 62.5%;
+background-color: lightgoldenrodyellow;
+width: 100%;
+max-width: 100%;
+}
+
+*,
+*:before,
+*:after {
+box-sizing: inherit;
+}
+body {
+font-family: @main-font;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+font-size: 2rem;
+font-family: @heading-font;
+}
+
+img {
+width: 100%;
+height: auto;
+}
+
+p {
+line-height: 1.25;
+margin: 20px 0;
+font-size: 1.8rem;
+.bordered();
+}
+
+li {
+line-height: 1.25;
+margin: 20px 0;
+font-size: 1.8rem;
+.bordered();
+}
+
+.container {
+max-width: 600px;
+margin: 0 auto;
+font-size: 1.6rem;
+}
+
+strong {
+font-weight: bold;
+color: @main-color;
+}
+
+header {
+border-bottom: 1px solid black;
+margin: 20px 0;
+padding: 20px 0;
+display: flex;
+justify-content: space-between;
+max-width: 100%;
+
+@media (max-width: 515px) {
+flex-direction: column;
+align-items: center;
+} // closes header media query
+
+h1 {
+font-size: 2rem;
+
+@media (max-width: 515px) {
+margin-bottom: 20px;
+} // closes media query for h1
+} // closes h1
+
+nav {
+// margin-left: 62px;
+display: flex;
+flex-direction: column-reverse;
+
+
+@media (max-width: 515px) {
+margin-left: 0;
+} // closes media query for nav
+
+a {
+margin-left: 20px;
+font-size: 1.8rem;
+color: @accent-color;
+
+&:hover {
+color: @main-color;
+}
+} // closes the a tag
+} // closes the nav
+} // closes the header
+
+.main-content {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+}
+
+@media (max-width: 515px) {
+.main-content {
+flex-direction: column;
+}
+}
+
+.main-content section {
+margin: 20px 2.5%;
+width: 45%;
+
+@media (max-width: 515px) {
+width: 90%;
+}
+}
+
+.main-footer {
+margin-bottom: 40px;
+display: flex;
+justify-content: center;
+border-top: 1px dashed black;
+padding-top: 20px;
+
+nav {
+width: 90%;
+display: flex;
+justify-content: space-around;
+} // closes footer nav
+} // closes the footer
+
+.button-parent {
+.center();
+}
+.contact-btn {
+display: block;
+background-color: @main-color;
+margin: 0 10px 20px;
+cursor: pointer;
+width: 200px;
+height: 45px;
+font-size: 2rem;
+border-radius: 10px;
+
+@media (max-width: 515px) {
+width: 90%;
+height: 50px;
+font-size: 2.5rem;
+} // closes 515 media query
+
+@media (max-width: 400px) {
+background: green;
+color: white;
+} // closes 400 media query
+} // closes the button
